@@ -63,7 +63,7 @@ function tableToString(tbl, indent)
 		elseif tostring(v) == "inf" and v == math.huge then
 			valueString = "math.huge"
 		else
-			valueString = "nil --[[ Failed to get type: "..typeof(v)or"nil".." ]]"
+			valueString = "nil --[[ Failed to get type: "..typeof(v).." ]]"
 		end
 
 		str = str .. formatting .. keyString .. " = " .. valueString .. ",\n"
