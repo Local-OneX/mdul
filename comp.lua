@@ -58,6 +58,8 @@ function tableToString(tbl, indent)
 			valueString = '"' .. v .. '"'
 		elseif type(v) == "number" then
 			valueString = tostring(v)
+		elseif type(v) == "boolean" then
+			valueString = tostring(v)	
 		elseif tostring(v) == "inf" and v == math.huge then
 			valueString = "math.huge"
 		else
