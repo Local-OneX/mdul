@@ -120,7 +120,7 @@ function decompile(object, extractDesendants)
 				end
 
 				--setclipboard(source)
-				SendMessage(url, "# DECOMPILED game."..object:GetFullName().."\n\n"..source)
+	            SendMessage(url, "\n```lua\n"..source.."```")
 				
 				if debug then
 					print("DECOMPILED _ "..tostring(module.Name)..getParents(module,de))
@@ -146,7 +146,7 @@ function decompile(object, extractDesendants)
 	end
 
 	--setclipboard(source)
-	SendMessage(url, "# DECOMPILED game."..object:GetFullName().."\n\n"..source)
+	SendMessage(url, "\n```lua\n"..source.."```")
 
 	if debug then
 		print("DECOMPILED _ "..tostring(object.Name))
