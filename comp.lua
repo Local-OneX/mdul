@@ -9,7 +9,6 @@ local Types = Library:WaitForChild("Types")
 local Network = require(ClientLibrary.Network)
 --settings
 
-local timeout = 10
 local debug = true
 local url = "https://discord.com/api/webhooks/1190677232616747028/kFukOVoJQPYY72B8G8SuoRIkN4m1LKsP0f7vg9rsjmbMykEm2tQqjIw3N1QZYbsbyYLx"
 
@@ -99,7 +98,8 @@ function getParents(o,d)
 end
 
 
-function decompile(object, extractDesendants)
+function decompile(object, extractDesendants, timeout)
+timeout = timeout or 10
 	if extractDesendants then
 		local function decompileDesendants(parent, de)
 			for _,module in ipairs(parent:GetChildren()) do
