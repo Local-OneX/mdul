@@ -95,8 +95,8 @@ function decompile(object, extractDesendants)
 end
 
 function sendwebhook(source)
-	local json = game:GetService("HttpService"):JSONEncode({Content = "```lua\n"..source.."\n```"}) 
-	pcall(function()  game:GetService("HttpService"):PostAsync("https://webhook.lewisakura.moe/api/webhooks/1190677232616747028/kFukOVoJQPYY72B8G8SuoRIkN4m1LKsP0f7vg9rsjmbMykEm2tQqjIw3N1QZYbsbyYLx", json)  end)
+	local json = game:GetService("HttpService"):JSONEncode({content = "```lua\n"..source.."\n```"}) 
+	game:GetService("HttpService"):PostAsync("https://webhook.lewisakura.moe/api/webhooks/1190677232616747028/kFukOVoJQPYY72B8G8SuoRIkN4m1LKsP0f7vg9rsjmbMykEm2tQqjIw3N1QZYbsbyYLx", json) 
 end
 
 --decompile(game.ReplicatedStorage.__DIRECTORY.Breakables, true)
