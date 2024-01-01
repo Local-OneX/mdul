@@ -55,10 +55,12 @@ function tableToString(tbl, indent)
 			valueString = path
 		elseif type(v) == "string" then
 			valueString = '"' .. v .. '"'
+		elseif type(v) == "number" then
+			valueString = tostring(v)
 		elseif tostring(v) == "inf" and v == math.huge then
 			valueString = "math.huge"
 		else
-			valueString = "--[[ Not supported ]]"
+			valueString = "nil --[[ Failed to get type: "..typeof(v)or"nil".." ]]"
 		end
 
 		str = str .. formatting .. keyString .. " = " .. valueString .. ",\n"
@@ -148,3 +150,4 @@ function decompile(object, extractDesendants)
 end
 
 return decompile
+
