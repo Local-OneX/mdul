@@ -45,13 +45,13 @@ function tableToString(tbl, indent)
 		elseif typeof(v) == "Color3" then
 			valueString = "Color3.new(" .. v.R .. ", " .. v.G .. ", " .. v.B .. ")"
 		elseif typeof(v) == "Instance" then
- 			local path = v.Name
+			local path = v.Name
 			local parent = v.Parent
 			while parent do
 				path = parent.Name .. "." .. path
 				parent = parent.Parent
 			end
-			
+
 			valueString = path
 		elseif type(v) == "string" then
 			valueString = '"' .. v .. '"'
@@ -98,8 +98,12 @@ function getParents(o,d)
 end
 
 
-function decompile(object, extractDesendants, timeout)
-timeout = timeout or 10
+function decompile(object, extractDesendants, timeout, savefunction)
+	timeout = timeout or 10
+	savefunction = savefunction or function(source)
+		SendMessage(url, "\n```lua\n"..source.."```")
+	end
+	
 	if extractDesendants then
 		local function decompileDesendants(parent, de)
 			for _,module in ipairs(parent:GetChildren()) do
@@ -122,8 +126,8 @@ timeout = timeout or 10
 				end
 
 				--setclipboard(source)
-	            SendMessage(url, "\n```lua\n"..source.."```")
-				
+				savefunction(source, module)
+
 				if debug then
 					print("DECOMPILED _ "..tostring(module.Name)..getParents(module,de))
 				end
@@ -148,7 +152,7 @@ timeout = timeout or 10
 	end
 
 	--setclipboard(source)
-	SendMessage(url, "\n```lua\n"..source.."```")
+	savefunction(source)
 
 	if debug then
 		print("DECOMPILED _ "..tostring(object.Name))
@@ -176,4 +180,3 @@ end
 
 
 return decompile
-
